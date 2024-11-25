@@ -18,7 +18,7 @@ function MovementControls() {
           <input type="number" defaultValue="123" />
         </div>
         <div className="input-group">
-          <label>Accel</label>
+          <label>Acceleration</label>
           <input type="number" defaultValue="123" />
         </div>
       </div>
