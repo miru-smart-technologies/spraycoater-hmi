@@ -1,38 +1,24 @@
-const mqtt = require('mqtt')
+const { MqttClient } = require('./mqtt-client');
 
-const url = 'mqtt://192.168.7.2:1883'
+const url = 'mqtt://192.168.7.2:1883';
 
-// Create an MQTT client instance
-const options = {
-  // Clean session
-  clean: true,
-  connectTimeout: 4000
-}
-const client  = mqtt.connect(url, options)
-client.on('connect', function () {
-  console.log('Connected')
-  // Subscribe to a topic
-  client.subscribe('devices/io-expander/+/digital-input/Run', function (err) {
-    if (err) {
-      console.error('Subscription error:', err)
-    }
-  })
-  client.subscribe('Ready', function (err) {
-    if (err) {
-      console.error('Subscription error:', err)
-    }
-  })
-  client.subscribe('Finished', function (err) {
-    if (err) {
-      console.error('Subscription error:', err)
-    }
-  })
+const client = new MqttClient(url, () => {
+  client.subscribe('devices/io-expander/+/digital-input/Run', /Run/, (topic, message) => {
+    console.log('Received message on Run:', message);
+  });
 
-})
+  client.subscribe('Ready', /Ready/, (topic, message) => {
+    console.log('Received message on Ready:', message);
+  });
 
-// Receive messages
-client.on('message', function (topic, message) {
-  // message is Buffer
-  console.log('Received message:', topic, message.toString())
-  client.end()
-})
+  client.subscribe('Finished', /Finished/, (topic, message) => {
+    console.log('Received message on Finished:', message);
+  });
+});
+
+client.on('message', (topic, message) => {
+    console.log('Received message:', message.toString());
+  }
+);
+
+module.exports = client;
