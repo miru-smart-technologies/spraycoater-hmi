@@ -1,4 +1,4 @@
-const { MqttClient } = require('./mqtt-client');
+import { MqttClient } from './mqtt-client.ts';
 
 const url = 'mqtt://192.168.7.2:1883';
 
@@ -21,4 +21,4 @@ client.on('message', (topic, message) => {
   }
 );
 
-module.exports = client;
+export default client;
