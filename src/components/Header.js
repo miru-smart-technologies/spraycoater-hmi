@@ -8,33 +8,33 @@ function Header() {
     const [finishedIndicator, setFinishedIndicator] = useState('indicator');
 
     useEffect(() => {
-        client.on('message', function (topic, message) {
-            const msg = message.toString();
-            if (topic.includes('Run')) {
-                if (msg === true) {
-                    setRunIndicator('indicator green');
-                } else {
-                    setRunIndicator('indicator red');
-                }
-            }
-            else if (topic.includes('Ready')) {
-                if (msg === 'true') {
-                    setReadyIndicator('indicator green');
-                } else {
-                    setReadyIndicator('indicator red');
-                }
-            }
-            else if (topic.includes('Finished')) {
-                if (msg === 'True') {
-                    setFinishedIndicator('indicator green');
-                } else {
-                    setFinishedIndicator('indicator red');
-                }
-            }
-        });
+        // client.on('message', function (topic, message) {
+        //     const msg = message.toString();
+        //     if (topic.includes('Run')) {
+        //         if (msg === true) {
+        //             setRunIndicator('indicator green');
+        //         } else {
+        //             setRunIndicator('indicator red');
+        //         }
+        //     }
+        //     else if (topic.includes('Ready')) {
+        //         if (msg === 'true') {
+        //             setReadyIndicator('indicator green');
+        //         } else {
+        //             setReadyIndicator('indicator red');
+        //         }
+        //     }
+        //     else if (topic.includes('Finished')) {
+        //         if (msg === 'True') {
+        //             setFinishedIndicator('indicator green');
+        //         } else {
+        //             setFinishedIndicator('indicator red');
+        //         }
+        //     }
+        // });
 
         return () => {
-            client.end();
+            // client.end();
         };
     }, []);
 

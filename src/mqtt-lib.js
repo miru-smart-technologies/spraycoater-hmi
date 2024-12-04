@@ -1,42 +1,24 @@
-import mqtt, { MqttClient } from "mqtt"
+import { MqttClient } from './mqtt-client.ts';
 
 const url = 'mqtt://192.168.7.2:1883';
 
-// Connect to the MQTT broker
-const client = mqtt.connect(url);
+const client = new MqttClient(url, () => {
+  client.subscribe('devices/io-expander/+/digital-input/Run', /Run/, (topic, message) => {
+    console.log('Received message on Run:', message);
+  });
 
-// Subscribe to a topic
-client.on('connect', () => {
-  console.log('Connected to MQTT broker');
-  client.subscribe('Run', (err) => {
-    if (!err) {
-      console.log('Subscribed to Run');
-    } else {
-      console.error('Failed to subscribe:', err);
-    }
+  client.subscribe('Ready', /Ready/, (topic, message) => {
+    console.log('Received message on Ready:', message);
+  });
+
+  client.subscribe('Finished', /Finished/, (topic, message) => {
+    console.log('Received message on Finished:', message);
   });
 });
 
-// Handle incoming messages
-client.on('message', (topic, message) => {
-  console.log(`Received message on ${topic}: ${message.toString()}`);
-});
-
-// Publish a message to a topic
-client.on('connect', () => {
-  client.publish('Ready', "True", (err) => {
-    if (!err) {
-      console.log('Message published');
-    } else {
-      console.error('Failed to publish message:', err);
-    }
-  });
-});
-
-// Handle errors
-client.on('error', (err) => {
-  console.error('MQTT error:', err);
-});
-
+// client.on('message', (topic, message) => {
+//     console.log('Received message:', message.toString());
+//   }
+// );
 
 export default client;
