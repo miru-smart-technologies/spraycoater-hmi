@@ -1,7 +1,12 @@
 import { MqttClient } from './mqtt-client.ts';
 
-// const url = 'mqtt://192.168.7.2:1883';
-const url = 'mqtt://localhost:1884';
+const env = 'vention'
+
+const protocol = 'ws';
+const localhost = 'localhost';
+const vention = '192.168.7.2';
+const port = '9001'
+const url = `${protocol}://${env === 'vention' ? vention : localhost}:${port}`;
 
 const client = new MqttClient(url);
 
