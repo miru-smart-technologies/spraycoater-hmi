@@ -8,35 +8,22 @@ function Header() {
     const [finishedIndicator, setFinishedIndicator] = useState('indicator');
 
     useEffect(() => {
-        // client.on('message', function (topic, message) {
-        //     const msg = message.toString();
-        //     if (topic.includes('Run')) {
-        //         if (msg === true) {
-        //             setRunIndicator('indicator green');
-        //         } else {
-        //             setRunIndicator('indicator red');
-        //         }
-        //     }
-        //     else if (topic.includes('Ready')) {
-        //         if (msg === 'true') {
-        //             setReadyIndicator('indicator green');
-        //         } else {
-        //             setReadyIndicator('indicator red');
-        //         }
-        //     }
-        //     else if (topic.includes('Finished')) {
-        //         if (msg === 'True') {
-        //             setFinishedIndicator('indicator green');
-        //         } else {
-        //             setFinishedIndicator('indicator red');
-        //         }
-        //     }
-        // });
+        client.subscribe("Run", RegExp(".*"), (topic, message) => {
+            console.log(`Received message on topic ${topic}: ${message}`);
+            setRunIndicator(`indicator ${message === 'True' ? 'green' : 'red'}`);
+        });
 
-        return () => {
-            // client.end();
-        };
+        client.subscribe("Ready", RegExp(".*"), (topic, message) => {
+            console.log(`Received message on topic ${topic}: ${message}`);
+            setReadyIndicator(`indicator ${message === 'True' ? 'green' : 'red'}`);
+        });
+
+        client.subscribe("Finished", RegExp(".*"), (topic, message) => {
+            console.log(`Received message on topic ${topic}: ${message}`);
+            setFinishedIndicator(`indicator ${message === 'True' ? 'green' : 'red'}`);
+        });
     }, []);
+
 
   return (
     <div className="header">

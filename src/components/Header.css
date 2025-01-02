@@ -24,3 +24,11 @@
   min-width: 60px; /* Ensure a consistent size */
   text-align: center;
 }
+
+.indicator.green {
+  background-color: green;
+}
+
+.indicator.red {
+  background-color: red;
+}
