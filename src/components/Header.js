@@ -8,20 +8,31 @@ function Header() {
     const [finishedIndicator, setFinishedIndicator] = useState('indicator');
 
     useEffect(() => {
-        client.subscribe("Run", RegExp(".*"), (topic, message) => {
+        const handleRunMessage = (topic, message) => {
             console.log(`Received message on topic ${topic}: ${message}`);
             setRunIndicator(`indicator ${message === 'True' ? 'green' : 'red'}`);
-        });
+        };
 
-        client.subscribe("Ready", RegExp(".*"), (topic, message) => {
+        const handleReadyMessage = (topic, message) => {
             console.log(`Received message on topic ${topic}: ${message}`);
             setReadyIndicator(`indicator ${message === 'True' ? 'green' : 'red'}`);
-        });
+        };
 
-        client.subscribe("Finished", RegExp(".*"), (topic, message) => {
+        const handleFinishedMessage = (topic, message) => {
             console.log(`Received message on topic ${topic}: ${message}`);
             setFinishedIndicator(`indicator ${message === 'True' ? 'green' : 'red'}`);
-        });
+        };
+
+        client.subscribe("Run", /^Run$/, handleRunMessage);
+        client.subscribe("Ready", /^Ready$/, handleReadyMessage);
+        client.subscribe("Finished", /^Finished$/, handleFinishedMessage);
+
+
+        return () => {
+            client.unsubscribe("Run", handleRunMessage);
+            client.unsubscribe("Ready", handleReadyMessage);
+            client.unsubscribe("Finished", handleFinishedMessage);
+        };
     }, []);
 
 

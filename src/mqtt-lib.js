@@ -14,7 +14,7 @@ const subscribeToTopics = () => {
 
 client.on('connect', () => {
     console.log('Connected to MQTT broker');
-    subscribeToTopics();
+    // subscribeToTopics();
 });
 
 client.on('reconnect', () => {
@@ -29,6 +29,6 @@ client.on('error', (error) => {
     console.error(`MQTT client error: ${error}`);
 });
 
-client.publish('websocket', 'Hello from the client!');
+// client.publish('websocket', 'Hello from the client!');
 
 export default client;
