@@ -27,8 +27,10 @@
 
 .indicator.green {
   background-color: green;
+  color: white;
 }
 
 .indicator.red {
   background-color: red;
+  color: white;
 }

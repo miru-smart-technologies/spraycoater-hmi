@@ -1,6 +1,6 @@
 import { MqttClient } from './mqtt-client.ts';
 
-const env = 'vention'
+const env = 'localhost';
 
 const protocol = 'ws';
 const localhost = 'localhost';
