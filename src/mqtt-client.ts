@@ -99,6 +99,10 @@ class MqttClient {
     const options: IClientPublishOptions = { retain };
     this.mqttClient?.publish(topic, message, options);
   }
+
+  on(event: keyof mqtt.MqttClientEventCallbacks, cb: (arg: any) => void): void {
+    this.mqttClient?.on(event, cb);
+  }
 }
 
 export { MqttClient };
