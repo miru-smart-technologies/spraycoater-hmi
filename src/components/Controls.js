@@ -5,7 +5,7 @@ import client from '../mqtt-lib.js';
 function Controls() {
     const handleButtonClick = (event) => {
         console.log(`${event.target.textContent} pressed`);
-        client.publish('HMI/control', event.target.textContent);
+        client.publish('HMI/Control', event.target.textContent);
     };
 
     return (
