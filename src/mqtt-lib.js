@@ -17,9 +17,14 @@ const subscribeToTopics = () => {
   console.log("Subscribed to all topics");
 };
 
+const refreshStateMachine = () => {
+  client.publish("HMI/Refresh", "Refresh");
+};
+
 client.on("connect", () => {
   console.log("Connected to MQTT broker");
   // subscribeToTopics();
+  refreshStateMachine();
 });
 
 client.on("reconnect", () => {

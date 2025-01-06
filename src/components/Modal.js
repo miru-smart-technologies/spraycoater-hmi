@@ -1,8 +1,19 @@
 import "./Modal.css";
 import { useMqttConnectionState } from "../hooks/useMQTTConnectionState";
+import { useEffect } from "react";
+import { useConnectionContext } from "../hooks/MQTTConnectionContext";
 
 function Modal() {
   const connectionState = useMqttConnectionState();
+  const { setConnected } = useConnectionContext();
+
+  useEffect(() => {
+    if (connectionState === "connected") {
+      setConnected(true);
+    } else {
+      setConnected(false);
+    }
+  }, [connectionState]);
 
   return (
     <div className={`modal ${connectionState !== "connected" && "active"}`}>
