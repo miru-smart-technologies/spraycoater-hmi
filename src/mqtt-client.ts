@@ -1,4 +1,4 @@
-import mqtt from "mqtt"
+import mqtt from "mqtt";
 import {
   IClientOptions,
   IClientPublishOptions,
@@ -27,9 +27,26 @@ interface Subscription {
 class MqttClient {
   private mqttClient?: MQTTClientType;
   private subscriptions: Subscription[] = [];
+  private connectionState:
+    | "connected"
+    | "disconnected"
+    | "error"
+    | "reconnecting" = "disconnected";
+  private onStateChangeCallback?: (
+    state: "connected" | "disconnected" | "error" | "reconnecting"
+  ) => void;
 
   constructor(url: string, connectCallback?: () => void) {
     this.connect(url, connectCallback);
+  }
+
+  private setConnectionState(
+    state: "connected" | "disconnected" | "error" | "reconnecting"
+  ) {
+    if (this.connectionState !== state) {
+      this.connectionState = state;
+      this.onStateChangeCallback?.(state);
+    }
   }
 
   connect(url: string, connectCallback?: () => void): void {
@@ -43,10 +60,12 @@ class MqttClient {
     this.mqttClient = mqtt.connect(url, options);
 
     this.mqttClient.on("connect", () => {
+      this.setConnectionState("connected");
       connectCallback?.();
     });
 
     this.mqttClient.on("close", () => {
+      this.setConnectionState("disconnected");
       console.warn("MQTT connection closed");
       this.mqttClient?.end(true, {}, () => {
         console.log("MQTT connection ended");
@@ -58,7 +77,12 @@ class MqttClient {
       });
     });
 
+    this.mqttClient.on("reconnect", () => {
+      this.setConnectionState("reconnecting");
+    });
+
     this.mqttClient.on("error", (error: Error) => {
+      this.setConnectionState("error");
       console.error("Error encountered in mqtt client: ", error);
     });
 
@@ -69,6 +93,22 @@ class MqttClient {
         }
       });
     });
+  }
+
+  setOnStateChangeCallback(
+    callback: (
+      state: "connected" | "disconnected" | "reconnecting" | "error"
+    ) => void
+  ) {
+    this.onStateChangeCallback = callback;
+  }
+
+  getConnectionState():
+    | "connected"
+    | "disconnected"
+    | "reconnecting"
+    | "error" {
+    return this.connectionState;
   }
 
   subscribe(topic: string, regex: RegExp, cb: Callback): void {
