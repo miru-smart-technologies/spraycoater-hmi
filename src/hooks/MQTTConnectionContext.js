@@ -1,7 +1,6 @@
-// For some reason useMqttConnectionState() and client.getConnectionStatus doesn't work properly in the Header.js component
-// I'm not sure why, but it seems to work properly in Modal.js, which is why I made this context:
-// so I can update the context in Modal.js whenever the connection state changes and use the context in Header.js
-// It's weird, I know.
+// For some reason useMqttConnectionState() and client.getConnectionStatus don't work properly in the Header.js component
+// Not sure why but they seem to work properly in Modal.js, which what this context is for:
+// the context is updated in Modal.js whenever the connection state changes, and is used in Header.js to keep track of the connection state
 import { createContext, useContext, useState } from "react";
 
 const ConnectionContext = createContext(undefined);
