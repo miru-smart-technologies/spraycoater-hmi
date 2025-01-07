@@ -19,7 +19,6 @@ const subscribeToTopics = () => {
 
 const refreshStateMachine = () => {
   client.publish("HMI/Refresh", "Refresh");
-  console.log("Refreshed data from state machine");
 };
 
 client.on("connect", () => {
@@ -29,7 +28,7 @@ client.on("connect", () => {
 });
 
 client.on("reconnect", () => {
-  console.log("Reconnecting to MQTT broker");
+  console.warn("Reconnecting to MQTT broker");
 });
 
 client.on("close", () => {

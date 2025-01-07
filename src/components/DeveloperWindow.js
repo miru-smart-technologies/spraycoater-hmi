@@ -5,17 +5,15 @@ import { useLogs } from "../context/LogContext";
 function DeveloperWindow() {
   const [windowOpen, setWindowOpen] = useState(false);
   const [tab, setTab] = useState("HMI");
-  const hmiLogs = useLogs();
+  const { hmiLogs, stateMachineLogs } = useLogs();
 
   const onOpenWindowButtonClick = () => {
     if (!windowOpen) {
-      console.log("Developer window opened");
     }
     setWindowOpen(true);
   };
 
   const onCloseWindowButtonClick = () => {
-    console.log("Developer window closed");
     setWindowOpen(false);
   };
 
@@ -39,7 +37,7 @@ function DeveloperWindow() {
     </div>
   );
 
-  const logs = tab === "HMI" ? hmiLogs : hmiLogs;
+  const logs = tab === "HMI" ? hmiLogs : stateMachineLogs;
 
   const logComponents = logs.map((log, index) => (
     <div
@@ -67,12 +65,12 @@ function DeveloperWindow() {
         <div className="log-container">{logComponents}</div>
       </div>
       <div>
-        <button
+        <div
           className="open-window-button button"
           onClick={onOpenWindowButtonClick}
         >
           Dev Logs
-        </button>
+        </div>
       </div>
     </div>
   );
