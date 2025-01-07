@@ -18,4 +18,7 @@ code {
   border: none;
   border-radius: 7px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-direction: center;
 }

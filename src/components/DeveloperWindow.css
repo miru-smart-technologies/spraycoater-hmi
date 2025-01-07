@@ -15,6 +15,7 @@
   background: #286fe2;
   font-weight: 500;
   color: white;
+  gap: 0.3em;
 }
 
 .dev-window {
@@ -87,7 +88,12 @@
 }
 
 .close-window-button {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(115, 120, 146, 1);
+  margin-left: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3em;
 }
 
 .tab-button:hover,
