@@ -1,11 +1,12 @@
 import "./DeveloperWindow.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLogs } from "../context/LogContext";
 
 function DeveloperWindow() {
   const [windowOpen, setWindowOpen] = useState(false);
   const [tab, setTab] = useState("HMI");
   const { hmiLogs, stateMachineLogs } = useLogs();
+  const logContainerRef = useRef(null);
 
   const onOpenWindowButtonClick = () => {
     if (!windowOpen) {
@@ -26,13 +27,13 @@ function DeveloperWindow() {
   const tabButtons = (
     <div className="tab-buttons-container">
       {tabButtonLabels.map((label, index) => (
-        <button
+        <div
           key={index}
           className={`tab-button ${tab === label && "selected"}`}
           onClick={() => onTabButtonClick(label)}
         >
           {label}
-        </button>
+        </div>
       ))}
     </div>
   );
@@ -50,6 +51,12 @@ function DeveloperWindow() {
     </div>
   ));
 
+  useEffect(() => {
+    if (logContainerRef.current) {
+      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
+    }
+  }, [logs]);
+
   return (
     <div className="dev-window-container">
       <div className={`dev-window ${windowOpen && "active"}`}>
@@ -62,7 +69,9 @@ function DeveloperWindow() {
             x
           </button>
         </div>
-        <div className="log-container">{logComponents}</div>
+        <div className="log-container" ref={logContainerRef}>
+          {logComponents}
+        </div>
       </div>
       <div>
         <div
