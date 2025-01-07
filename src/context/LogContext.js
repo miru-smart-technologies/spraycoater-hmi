@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { logMessages } from "../helper/logManager";
+import { logMessages, logEventTarget } from "../helper/logManager";
 
 const LogContext = createContext();
 
@@ -8,13 +8,16 @@ export const LogProvider = ({ children }) => {
   const [stateMachineLogs, setStateMachineLogs] = useState([]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (logMessages.length > hmiLogs.length) {
-        setHmiLogs([...logMessages]);
-      }
-    }, 500);
-    return () => clearInterval(interval);
-  }, [logMessages]);
+    const handleNewLog = () => {
+      setHmiLogs([...logMessages]);
+    };
+
+    logEventTarget.addEventListener("newLog", handleNewLog);
+
+    return () => {
+      logEventTarget.removeEventListener("newLog", handleNewLog);
+    };
+  }, []);
 
   return (
     <LogContext.Provider
