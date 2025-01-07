@@ -4,15 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Buffer } from "buffer";
-import { ConnectionProvider } from "./hooks/MQTTConnectionContext";
+import { ConnectionProvider } from "./context/MQTTConnectionContext";
+import { LogProvider } from "./context/LogContext";
 
 window.Buffer = Buffer;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ConnectionProvider>
-    <App />
-  </ConnectionProvider>
+  <LogProvider>
+    <ConnectionProvider>
+      <App />
+    </ConnectionProvider>
+  </LogProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

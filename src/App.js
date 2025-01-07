@@ -6,6 +6,7 @@ import MovementControls from "./components/MovementControls";
 import Dropdown from "./components/dropdown";
 import Modal from "./components/Modal";
 import PathData from "./components/PathData";
+import DeveloperWindow from "./components/DeveloperWindow";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <MovementControls />
         </div>
         <PathData />
+        <DeveloperWindow />
       </div>
       <Modal />
     </div>
