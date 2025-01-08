@@ -21,6 +21,7 @@ code {
   display: flex;
   align-items: center;
   flex-direction: center;
+  margin: 0.5em;
 }
 
 .grey-border {
