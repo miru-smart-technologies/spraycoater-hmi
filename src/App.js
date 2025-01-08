@@ -5,6 +5,7 @@ import Controls from "./components/Controls";
 import MovementControls from "./components/MovementControls";
 import Dropdown from "./components/dropdown";
 import Modal from "./components/Modal";
+import PathData from "./components/PathData";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Controls />
           <MovementControls />
         </div>
+        <PathData />
       </div>
       <Modal />
     </div>
