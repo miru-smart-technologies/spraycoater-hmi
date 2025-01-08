@@ -31,13 +31,13 @@ class MqttClient {
   private mqttClient?: MQTTClientType;
   private subscriptions: Subscription[] = [];
   private connectionState:
-    | "connected"
-    | "disconnected"
-    | "error"
-    | "reconnecting" = "disconnected";
+    | "Connected"
+    | "Disconnected"
+    | "Error"
+    | "Reconnecting" = "Disconnected";
   private isReconnecting: boolean = false;
   private onStateChangeCallback?: (
-    state: "connected" | "disconnected" | "error" | "reconnecting"
+    state: "Connected" | "Disconnected" | "Error" | "Reconnecting"
   ) => void;
 
   constructor(url: string, connectCallback?: () => void) {
@@ -45,7 +45,7 @@ class MqttClient {
   }
 
   private setConnectionState(
-    state: "connected" | "disconnected" | "error" | "reconnecting"
+    state: "Connected" | "Disconnected" | "Error" | "Reconnecting"
   ) {
     if (this.connectionState !== state) {
       this.connectionState = state;
@@ -64,7 +64,7 @@ class MqttClient {
     this.mqttClient = mqtt.connect(url, options);
 
     this.mqttClient.on("connect", () => {
-      this.setConnectionState("connected");
+      this.setConnectionState("Connected");
       this.isReconnecting = false;
       connectCallback?.();
     });
@@ -73,16 +73,16 @@ class MqttClient {
       if (this.isReconnecting) {
         return;
       }
-      this.setConnectionState("disconnected");
+      this.setConnectionState("Disconnected");
     });
 
     this.mqttClient.on("reconnect", () => {
-      this.setConnectionState("reconnecting");
+      this.setConnectionState("Reconnecting");
       this.isReconnecting = true;
     });
 
     this.mqttClient.on("error", (error: Error) => {
-      this.setConnectionState("error");
+      this.setConnectionState("Error");
       console.error("Error encountered in mqtt client: ", error);
     });
 
@@ -97,17 +97,17 @@ class MqttClient {
 
   setOnStateChangeCallback(
     callback: (
-      state: "connected" | "disconnected" | "reconnecting" | "error"
+      state: "Connected" | "Disconnected" | "Reconnecting" | "Error"
     ) => void
   ) {
     this.onStateChangeCallback = callback;
   }
 
   getConnectionState():
-    | "connected"
-    | "disconnected"
-    | "reconnecting"
-    | "error" {
+    | "Connected"
+    | "Disconnected"
+    | "Reconnecting"
+    | "Error" {
     return this.connectionState;
   }
 

@@ -59,7 +59,7 @@ function DeveloperWindow() {
 
   return (
     <div className="dev-window-container">
-      <div className={`dev-window ${windowOpen && "active"}`}>
+      <div className={`dev-window grey-border ${windowOpen && "active"}`}>
         <div className="dev-buttons-container">
           {tabButtons}
           <button
@@ -73,10 +73,10 @@ function DeveloperWindow() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-x"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-x"
             >
               <path d="M18 6 6 18" />
               <path d="m6 6 12 12" />
@@ -99,10 +99,10 @@ function DeveloperWindow() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-terminal"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-terminal"
           >
             <polyline points="4 17 10 11 4 5" />
             <line x1="12" x2="20" y1="19" y2="19" />
