@@ -15,15 +15,15 @@ function Modal() {
             <span>Uh oh! An error occurred.</span>
           )}
         </div>
-        <div>
-          {connectionState === "disconnected" && (
-            <p>Preparing to reconnect...</p>
-          )}
-          {connectionState === "reconnecting" && (
-            <p>Currently attempting to reconnect...</p>
-          )}
-          {connectionState === "error" && <p>Check logs for error details.</p>}
-        </div>
+        {connectionState === "disconnected" && (
+          <div>Preparing to reconnect...</div>
+        )}
+        {connectionState === "reconnecting" && (
+          <div>Currently attempting to reconnect...</div>
+        )}
+        {connectionState === "error" && (
+          <div>Check logs for error details.</div>
+        )}
       </div>
     </div>
   );

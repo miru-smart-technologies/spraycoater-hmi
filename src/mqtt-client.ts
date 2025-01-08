@@ -5,8 +5,11 @@ import {
   MqttClient as MQTTClientType,
 } from "mqtt";
 
-const MQTT_TIMEOUT_SECONDS = 3;
+const MQTT_TIMEOUT_SECONDS = 10;
+const MQTT_RECONNECT_SECONDS = 5;
+
 const MQTT_TIMEOUT_MS = MQTT_TIMEOUT_SECONDS * 1000;
+const MQTT_RECONNECT_MS = MQTT_RECONNECT_SECONDS * 1000;
 
 const KEEP_ALIVE_SECONDS = 5;
 const RECONNECT_INTERVAL_MS = 1 * 1000;
@@ -32,6 +35,7 @@ class MqttClient {
     | "disconnected"
     | "error"
     | "reconnecting" = "disconnected";
+  private isReconnecting: boolean = false;
   private onStateChangeCallback?: (
     state: "connected" | "disconnected" | "error" | "reconnecting"
   ) => void;
@@ -53,7 +57,7 @@ class MqttClient {
     const options: IClientOptions = {
       connectTimeout: MQTT_TIMEOUT_MS,
       clientId: getClientId(),
-      reconnectPeriod: 0,
+      reconnectPeriod: MQTT_RECONNECT_MS,
       keepalive: KEEP_ALIVE_SECONDS,
     };
 
@@ -61,24 +65,21 @@ class MqttClient {
 
     this.mqttClient.on("connect", () => {
       this.setConnectionState("connected");
+      this.isReconnecting = false;
       connectCallback?.();
     });
 
     this.mqttClient.on("close", () => {
+      if (this.isReconnecting) {
+        return;
+      }
       this.setConnectionState("disconnected");
       console.warn("MQTT connection closed");
-      this.mqttClient?.end(true, {}, () => {
-        console.log("MQTT connection ended");
-        this.mqttClient = undefined;
-        setTimeout(
-          () => this.connect(url, connectCallback),
-          RECONNECT_INTERVAL_MS
-        );
-      });
     });
 
     this.mqttClient.on("reconnect", () => {
       this.setConnectionState("reconnecting");
+      this.isReconnecting = true;
     });
 
     this.mqttClient.on("error", (error: Error) => {
