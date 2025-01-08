@@ -74,7 +74,6 @@ class MqttClient {
         return;
       }
       this.setConnectionState("disconnected");
-      console.warn("MQTT connection closed");
     });
 
     this.mqttClient.on("reconnect", () => {

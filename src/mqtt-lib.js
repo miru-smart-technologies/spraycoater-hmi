@@ -28,11 +28,11 @@ client.on("connect", () => {
 });
 
 client.on("reconnect", () => {
-  console.log("Reconnecting to MQTT broker");
+  console.warn("Reconnecting to MQTT broker");
 });
 
 client.on("close", () => {
-  console.log("Disconnected from MQTT broker");
+  console.warn("Disconnected from MQTT broker");
 });
 
 client.on("error", (error) => {

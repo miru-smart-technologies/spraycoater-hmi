@@ -1,7 +1,7 @@
 import "./Modal.css";
 import { useMqttConnectionState } from "../hooks/useMQTTConnectionState";
 import { useEffect } from "react";
-import { useConnectionContext } from "../hooks/MQTTConnectionContext";
+import { useConnectionContext } from "../context/MQTTConnectionContext";
 
 function Modal() {
   const connectionState = useMqttConnectionState();
