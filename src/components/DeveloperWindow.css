@@ -12,7 +12,7 @@
 }
 
 .open-window-button {
-  background: #286fe2;
+  background: rgba(63, 94, 255, 1);
   font-weight: 500;
   color: white;
   gap: 0.3em;
@@ -20,8 +20,6 @@
 
 .dev-window {
   display: none;
-  border: 1px solid #e7ebf0;
-  box-shadow: 0 2px 5px rgba(88, 96, 123, 0.08);
   border-radius: 14px;
   padding: 0.5em;
   flex-direction: column;
@@ -73,6 +71,7 @@
 
 .tab-buttons-container {
   display: flex;
+  gap: 0.25em;
 }
 
 .tab-button,
@@ -80,11 +79,15 @@
   background: none;
   border: none;
   margin: 0;
-  padding: 0.3em 0.7em;
+  padding: 0.6em 1.1em;
   border-radius: 7px;
   font-weight: 500;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.tab-button {
+  border: 1px solid rgba(235, 239, 252, 1);
 }
 
 .close-window-button {
@@ -96,14 +99,22 @@
   padding: 0.3em;
 }
 
-.tab-button:hover,
+.tab-button:hover {
+  background: rgba(242, 242, 242, 1);
+  border: 1px solid rgba(228, 228, 228, 1);
+}
+
 .close-window-button:hover {
-  background: #f6f9ff;
+  background: rgba(235, 239, 252, 1);
+}
+
+.tab-button.selected {
+  border: 1px solid #1831cc;
 }
 
 .tab-button.selected,
 .close-window-button:hover {
   color: #1831cc;
-  background: #f6f9ff;
+  background: rgba(235, 239, 252, 1);
   font-weight: 600;
 }
