@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from "react";
 import client from "../mqtt-lib";
+import "./dropdown.css";
 
 function Dropdown() {
-  // State to store the selected option
   const [selectedOption, setSelectedOption] = useState("");
-  const [options, setOptions] = useState([
-    "Option 1",
-    "Option 2",
-    "Option 3",
-    "Option 4",
-    "Option 5",
-  ]);
+  const [options, setOptions] = useState({});
 
-  // Handle change event
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
-    console.log("Selected:", event.target.value); // Debugging
+    console.log("Selected:", event.target.value);
     client.publish("HMI/GCode/Select", event.target.value);
   };
 
   useEffect(() => {
     const handleAddOptionMessage = (topic, message) => {
       console.log(`Received message on topic ${topic}: ${message}`);
-      setOptions((prevOptions) => [...prevOptions, message]);
+
+      const messageToJSON = message.replace(/(\d+):/g, '"$1":');
+
+      const newOptions = JSON.parse(messageToJSON);
+
+      setOptions((prevOptions) => ({
+        ...prevOptions,
+        ...newOptions,
+      }));
     };
 
     client.subscribe(
@@ -43,7 +44,7 @@ function Dropdown() {
         <option value="" disabled>
           Select an option
         </option>
-        {options.map((option, index) => (
+        {Object.values(options).map((option, index) => (
           <option key={index} value={option}>
             {option}
           </option>
