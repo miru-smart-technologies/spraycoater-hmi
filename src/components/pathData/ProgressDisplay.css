@@ -28,3 +28,13 @@
   font-weight: 500;
   font-size: 1.1rem;
 }
+
+.current.blue,
+.slash.blue {
+  color: #3f5eff;
+}
+
+.current.purple,
+.slash.purple {
+  color: #a60eaa;
+}

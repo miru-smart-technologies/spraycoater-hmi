@@ -1,11 +1,11 @@
 import "./ProgressDisplay.css";
 
-function ProgressDisplay({ icon, label, current, total }) {
+function ProgressDisplay({ icon, label, current, total, color }) {
   return (
     <div className="progress-display">
       <div className="progress-container">
-        <span className="current">{current ?? "--"}</span>
-        <span className="slash">/</span>
+        <span className={`current ${color}`}>{current ?? "--"}</span>
+        <span className={`slash ${color}`}>/</span>
         <span className="total">{total ?? "--"}</span>
       </div>
       <div className="label-container">

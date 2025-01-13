@@ -34,8 +34,8 @@ function App() {
         <div className="gcode-container">
           <Dropdown />
           <PathData />
+          <Controls />
         </div>
-        <Controls />
         <DeveloperWindow />
       </div>
       <Modal />

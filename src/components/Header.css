@@ -3,9 +3,10 @@
   justify-content: space-between;
   width: 100%;
   max-width: 1449px;
-  margin-bottom: 20px;
-  padding: 0 5em;
+  padding: 2em 5em;
   box-sizing: border-box;
+  position: absolute;
+  top: 0;
 }
 
 .status {

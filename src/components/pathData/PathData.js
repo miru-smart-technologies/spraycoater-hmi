@@ -107,12 +107,14 @@ function PathData() {
         label="Pass"
         current={currPass}
         total={totalPasses}
+        color="blue"
       />
       <ProgressDisplay
         icon={LAYER_ICON_SVG}
         label="Layer"
         current={currLayer}
         total={totalLayers}
+        color="purple"
       />
     </div>
   );
