@@ -1,8 +1,11 @@
 .header {
   display: flex;
-  justify-content: space-around; /* Space between the BIT STATUS PLC and BIT STATUS VENTION sections */
+  justify-content: space-between;
   width: 100%;
+  max-width: 1449px;
   margin-bottom: 20px;
+  padding: 0 5em;
+  box-sizing: border-box;
 }
 
 .status {

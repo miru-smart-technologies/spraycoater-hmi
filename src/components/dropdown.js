@@ -8,7 +8,7 @@ function Dropdown() {
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
-    console.log("Selected:", event.target.value);
+    console.log("Selected GCode key:", event.target.value);
     client.publish("HMI/GCode/Select", event.target.value);
   };
 
@@ -39,18 +39,18 @@ function Dropdown() {
 
   return (
     <div className="dropdown">
-      <label htmlFor="gcode-select">Select GCODE:</label>
+      <label htmlFor="gcode-select">GCode File</label>
       <select id="gcode-select" value={selectedOption} onChange={handleChange}>
         <option value="" disabled>
           Select an option
         </option>
-        {Object.values(options).map((option, index) => (
-          <option key={index} value={option}>
-            {option}
+        {Object.entries(options).map(([key, value]) => (
+          <option key={key} value={key}>
+            {value}
           </option>
         ))}
       </select>
-      {selectedOption && <p>You selected: {selectedOption}</p>}
+      {/* {selectedOption && <p>You selected: {selectedOption}</p>} */}
     </div>
   );
 }

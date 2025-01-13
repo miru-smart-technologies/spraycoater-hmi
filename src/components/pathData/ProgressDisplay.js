@@ -10,7 +10,7 @@ function ProgressDisplay({ icon, label, current, total }) {
       </div>
       <div className="label-container">
         <span>{icon}</span>
-        <span>Current {label}</span>
+        <span>{label}</span>
       </div>
     </div>
   );

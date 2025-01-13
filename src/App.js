@@ -7,6 +7,7 @@ import DeveloperWindow from "./components/DeveloperWindow";
 import { useLogs } from "./context/LogContext";
 import client from "./mqtt-lib";
 import PathData from "./components/pathData/PathData";
+import Controls from "./components/Controls";
 
 function App() {
   const { setStateMachineLogs } = useLogs();
@@ -29,11 +30,12 @@ function App() {
   return (
     <div className="app">
       <div className="main-container">
-        {/* <Header /> */}
+        <Header />
         <div className="gcode-container">
           <Dropdown />
           <PathData />
         </div>
+        <Controls />
         <DeveloperWindow />
       </div>
       <Modal />

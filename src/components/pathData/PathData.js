@@ -42,10 +42,10 @@ const LAYER_ICON_SVG = (
 );
 
 function PathData() {
-  const [totalLayers, setTotalLayers] = useState(5);
-  const [totalPasses, setTotalPasses] = useState(19);
-  const [currLayer, setCurrLayer] = useState(3);
-  const [currPass, setCurrPass] = useState(5);
+  const [totalLayers, setTotalLayers] = useState(null);
+  const [totalPasses, setTotalPasses] = useState(null);
+  const [currLayer, setCurrLayer] = useState(null);
+  const [currPass, setCurrPass] = useState(null);
 
   useEffect(() => {
     const handleTotalLayersMessage = (topic, message) => {
