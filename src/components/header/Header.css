@@ -1,12 +1,8 @@
 .header {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  max-width: 1449px;
-  padding: 2em 5em;
+  gap: 18em;
   box-sizing: border-box;
-  position: absolute;
-  top: 0;
 }
 
 .status {
@@ -30,11 +26,11 @@
 }
 
 .indicator.green {
-  background-color: green;
+  background-color: var(--green);
   color: white;
 }
 
 .indicator.red {
-  background-color: red;
+  background-color: var(--red);
   color: white;
 }

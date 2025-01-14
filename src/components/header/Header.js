@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
-import client from "../mqtt-lib";
-import { useConnectionContext } from "../context/MQTTConnectionContext";
+import client from "../../mqtt-lib";
+import { useConnectionContext } from "../../context/MQTTConnectionContext";
 
 function Header() {
   const [runIndicator, setRunIndicator] = useState("indicator");

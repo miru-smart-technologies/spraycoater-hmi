@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3em;
 }
 
 .button {
@@ -20,12 +19,12 @@
 }
 
 .button.green {
-  background-color: #4fc451;
+  background-color: var(--green);
   color: white;
 }
 
 .button.red {
-  background-color: #ff5740;
+  background-color: var(--red);
   color: white;
 }
 

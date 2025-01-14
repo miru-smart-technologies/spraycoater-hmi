@@ -2,6 +2,9 @@
 
 body,
 html {
+  --red: #e41a24;
+  --green: #4fc451;
+
   margin: 0;
   font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;

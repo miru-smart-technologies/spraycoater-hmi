@@ -22,6 +22,7 @@
   height: 100%;
   justify-content: center;
   align-items: center;
+  gap: 10vh;
 }
 
 .gcode-container {
@@ -29,7 +30,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2em;
+  gap: 3em;
+  border-radius: 15px;
+  padding: 2.5em 4.5em 3.5em 4.5em;
 }
 
 .content {
