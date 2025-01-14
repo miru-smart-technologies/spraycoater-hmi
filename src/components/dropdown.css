@@ -1,11 +1,22 @@
 .dropdown {
-    margin: 20px 0;
-  }
-  
-  select {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
+  margin: 20px 0;
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  opacity: 50%;
+}
+
+select {
+  padding: 0.7em 0.9em;
+  font-size: 1.1rem;
+  border: 1px solid #e7ebf0;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 28em;
+}

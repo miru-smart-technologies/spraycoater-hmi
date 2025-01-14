@@ -1,8 +1,8 @@
 .header {
   display: flex;
-  justify-content: space-around; /* Space between the BIT STATUS PLC and BIT STATUS VENTION sections */
-  width: 100%;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  gap: 18em;
+  box-sizing: border-box;
 }
 
 .status {
@@ -26,11 +26,11 @@
 }
 
 .indicator.green {
-  background-color: green;
+  background-color: var(--green);
   color: white;
 }
 
 .indicator.red {
-  background-color: red;
+  background-color: var(--red);
   color: white;
 }

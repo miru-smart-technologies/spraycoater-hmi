@@ -1,0 +1,40 @@
+.progress-display {
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-container {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.current,
+.slash {
+  font-size: 4em;
+  font-weight: 600;
+}
+
+.total {
+  font-size: 2.5em;
+  font-weight: 500;
+  opacity: 50%;
+}
+
+.label-container {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.current.blue,
+.slash.blue {
+  color: #3f5eff;
+}
+
+.current.purple,
+.slash.purple {
+  color: #a60eaa;
+}

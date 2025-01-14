@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import Header from "./components/Header";
-import Controls from "./components/Controls";
-import MovementControls from "./components/MovementControls";
+import Header from "./components/header/Header";
 import Dropdown from "./components/dropdown";
 import Modal from "./components/Modal";
-import PathData from "./components/PathData";
 import DeveloperWindow from "./components/DeveloperWindow";
 import { useLogs } from "./context/LogContext";
 import client from "./mqtt-lib";
+import PathData from "./components/pathData/PathData";
+import Controls from "./components/Controls";
 
 function App() {
   const { setStateMachineLogs } = useLogs();
@@ -21,14 +20,10 @@ function App() {
       ]);
     };
 
-    client.subscribe(
-      "HMI/Vention/Logs",
-      /^HMI\/Vention\/Logs$/,
-      handleLogMessage
-    );
+    client.subscribe("HMI/Logs", /^HMI\/Logs$/, handleLogMessage);
 
     return () => {
-      client.unsubscribe("HMI/Vention/Logs", handleLogMessage);
+      client.unsubscribe("HMI/Logs", handleLogMessage);
     };
   }, []);
 
@@ -36,12 +31,11 @@ function App() {
     <div className="app">
       <div className="main-container">
         <Header />
-        <div className="content">
+        <div className="gcode-container grey-border">
           <Dropdown />
-          <Controls />
-          <MovementControls />
+          <PathData />
         </div>
-        <PathData />
+        <Controls />
         <DeveloperWindow />
       </div>
       <Modal />

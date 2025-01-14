@@ -1,0 +1,16 @@
+.indicator-container {
+  /* border: 2px solid #e7ebf0; */
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #dde0e5;
+}
+
+.indicator-container.red {
+  color: var(--red);
+}
+
+.indicator-container.green {
+  color: var(--green);
+}

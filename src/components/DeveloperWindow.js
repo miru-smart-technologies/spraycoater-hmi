@@ -88,10 +88,7 @@ function DeveloperWindow() {
         </div>
       </div>
       <div>
-        <div
-          className="open-window-button button"
-          onClick={onOpenWindowButtonClick}
-        >
+        <div className="open-window-button" onClick={onOpenWindowButtonClick}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
